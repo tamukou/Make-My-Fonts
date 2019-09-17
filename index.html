@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Paint</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
+    <style>
+      @font-face {
+	      font-family: 'KanjiStrokeOrders';
+	      src: url('./resources/KanjiStrokeOrders_v4.002.ttf');
+      }
+      body {
+        padding: 15px 0;
+      }
+      #canvas {
+        border: 5px solid #52616b;
+        margin-left: 0;
+        margin-top: 15;
+        margin-right: 0;
+        margin-bottom: 0;
+      }
+      .view-canvas {
+        border: 5px solid #52616b;
+        margin-top: 15px;
+      }
+      #ave-canvas {
+        border: 5px solid #52616b;
+        margin-left: 0;
+        margin-top: 15;
+        margin-right: 0;
+        margin-bottom: 0;
+      }
+      .contents {
+        background-color: #b4c5d1;
+        margin: 30px 5px;
+      }
+      p {
+        margin-left:15px;
+        margin-top:0;
+        margin-right:15px;
+        margin-bottom:0;
+      }
+      .large-font {
+        font-family: 'KanjiStrokeOrders';
+        font-size:500%;
+      }
+      .button {
+        height: 100%;
+        width: 100%;
+        margin-left:0;
+        margin-top:0;
+        margin-right:0;
+        margin-bottom:0;
+      }
+      .container {
+        margin-bottom:10px;
+      }
+    </style>
+    <script type="text/javascript" src="logic.js"></script>
+  </head>
+  <body bgcolor="#c9d6df">
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-6">
+          <p><span class="large-font" id="target-char">「龍」</span>を書いてください</p>
+      </div>
+      <div class="col-6">
+        <p>登録した文字数 : <span id="saved-num">0</span>/<span id="total-char-num">0</span></p>
+        <p>残り総画数 : <span id="left-total-stroke">0</span>画</p>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="container">
+                <canvas id="canvas" width="400" height="400"></canvas>
+                <div class="row">
+                    <div class="col-6">
+                      <div class="container">
+                        <button id="cancel-button" class="button" type="button">書き直し</button>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="container">
+                            <button id="ok-button" class="button" type="button">追加</button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="container">
+                <canvas id="ave-canvas" width="400" height="400"></canvas>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="container">
+                          <button id="all-delete-button" class="button" type="button">全部消す</button>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                          <div class="container">
+                              <button id="save-button" class="button" type="button">保存</button>
+                            </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row contents">
+        <div class="col-2">
+            <div class="container">
+                <canvas class="view-canvas" width="80" height="80"></canvas>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="container">
+                <canvas class="view-canvas" width="80" height="80"></canvas>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="container">
+                <canvas class="view-canvas" width="80" height="80"></canvas>
+            </div>
+        </div><div class="col-2">
+            <div class="container">
+                <canvas class="view-canvas" width="80" height="80"></canvas>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="container">
+                <canvas class="view-canvas" width="80" height="80"></canvas>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="container">
+                <canvas class="view-canvas" width="80" height="80"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <p id="x_pos">0.000</p>
+        </div>
+        <div class="col-6">
+            <p id="y_pos">0.000</p>
+        </div>
+    </div>
+  </div>
+<script>
+    require('./renderer.js')
+</script>
+  </body>
+</html>
