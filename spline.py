@@ -97,36 +97,26 @@ def fourier(_list,n):
 
     return a, b
 
-if __name__ == '__main__':
-    #_list = np.arange(-5,5,0.01)
-    #print(_list)
-    #print(fourier(_list))
-
-    #フーリエ級数展開を有限で打ち切るその数
-    n = 50
+def main():
+    n = 50      #フーリエ級数展開を有限で打ち切るその数
     _json = get_json()
     _dict = json.loads(_json)
     _dict = _dict.replace('\\','')
     x_y_json = json.loads(_dict)
     #3次スプライン曲線で補間した密な点列を得る
     x,y = cubic_interpolate(x_y_json)
-    #a,bは画数ごとにa_x,b_xを入れる箱
-        #a = np.empty((0,n+1))
-        #b = np.empty((0,n+1))
-    a_x,b_x = fourier(x,n)
-    a_y,b_y = fourier(y,n)
+
+    a_x,b_x = fourier(x,n) #x(t)のフーリエ級数展開のsin,cosの係数たちをa_x,b_xに格納
+    a_y,b_y = fourier(y,n) #y(t)のフーリエ級数展開のsin,cosの係数たちをa_x,b_xに格納
     x = np.array([a_x,b_x])
     y = np.array([a_y,b_y])
-        #a = np.append(a, np.array([a_x]), axis=0)
-        #b = np.append(b, np.array([b_x]), axis=0)
+
     #フーリエ級数展開の係数を格納して、それを返す
     res_json = {}
-    #res_json["x"] = '['+str(a_x)+','+str(b_x)+']'
-    #res_json["y"] = '['+str(a_y)+','+str(b_y)+']'
     res_json["x"] = [a_x.tolist(), b_x.tolist()]
     res_json["y"] = [a_y.tolist(), b_y.tolist()]
 
-    #file = open('./test10.txt', 'w')
-    #file.write(str(res_json))
-    #file.close()
     print(json.dumps(res_json))
+
+if __name__ == '__main__':
+    main()
